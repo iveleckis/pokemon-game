@@ -31,8 +31,8 @@
         const html = `
             <div>
                 <h1>You have lost :/</h1>
-                <div class="flex justify-center">ASNFKASJFBK</div>
-                <div class="flex justify-center pt">Score: 123</div>
+                <h3 class="flex justify-center">${pokemon_name}</h3>
+                <div class="flex justify-center">Score: 123</div>
                 <div class="flex justify-center pt">
                     <button>play again</button>
                 </div>
@@ -130,17 +130,27 @@
         }
     };
 
-    (() => {
+    let startToggled = false;
+    const landing_screen = () => {
         const html = `
             <div id="difficulty">
-                <div class="flex justify-center">
-                    <img src="./assets/logo_main.png" alt="pokemon" />
-                </div>
-                <div class="btn-group flex justify-center pt">
-                   <button id="btn_easy">EASY</button>
-                   <button id="btn_medium">MEDIUM</button>
-                   <button id="btn_hard">HARD</button>
-                </div>
+                <h1 class="flex justify-center">
+                    pokemon game
+                </h1>
+                
+                ${
+                    startToggled
+                        ? `<div class="btn-group flex justify-center items-center direction-column pt">
+                                <button class="m-2 w-full p-2 border-5 border-dark-blue bg-blue color-white text-white" id="btn_easy">EASY</button>
+                                <button class="m-2 w-full p-2 border-5 border-dark-blue bg-blue color-white text-white" id="btn_medium">MEDIUM</button>
+                                <button class="m-2 w-full p-2 border-5 border-dark-blue bg-blue color-white text-white" id="btn_hard">HARD</button>
+                                <button class="m-3 w-full p-2 border-5 border-dark-blue bg-blue color-white text-white" id="btn_back">BACK</button>
+                            </div>`
+                        : `<div class="btn-group flex justify-center items-center direction-column pt">
+                                <button class="m-2 w-full p-2 border-5 border-dark-blue bg-blue color-white text-white" id="btn_start">start</button>
+                                <button class="m-2 w-full p-2 border-5 border-dark-blue bg-blue color-white text-white" id="btn_about">about</button>
+                            </div>`
+                }
                 <div class="flex justify-center items-center direction-column pt" id="health_container">
                    <div id="health_text"></div>
                    <div class="pt" id="start_button"></div>
@@ -148,11 +158,26 @@
             </div>
         `;
         root.innerHTML = html;
-        const btn_1 = document.getElementById('btn_easy');
-        const btn_2 = document.getElementById('btn_medium');
-        const btn_3 = document.getElementById('btn_hard');
-        btn_1.addEventListener('click', () => setHealth(10));
-        btn_2.addEventListener('click', () => setHealth(5));
-        btn_3.addEventListener('click', () => setHealth(3));
-    })();
+
+        if (startToggled) {
+            const btn_1 = document.getElementById('btn_easy');
+            const btn_2 = document.getElementById('btn_medium');
+            const btn_3 = document.getElementById('btn_hard');
+            const btn_back = document.getElementById('btn_back');
+            btn_1.addEventListener('click', () => setHealth(10));
+            btn_2.addEventListener('click', () => setHealth(5));
+            btn_3.addEventListener('click', () => setHealth(3));
+            btn_back.addEventListener('click', () => {
+                startToggled = !startToggled;
+                landing_screen();
+            });
+        } else {
+            const btn_start = document.getElementById('btn_start');
+            btn_start.addEventListener('click', () => {
+                startToggled = !startToggled;
+                landing_screen();
+            });
+        }
+    };
+    landing_screen();
 })();

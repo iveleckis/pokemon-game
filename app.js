@@ -6,10 +6,9 @@
     const try_letter = (letter, btn_clicked) => {
         const slots = document.getElementById('slots');
 
-        console.log(btn_clicked);
         const buttons = document.getElementById('letter_matrix');
-        const new_btn = `<button class="letter clicked">${letter}</button>`;
-        buttons.children[btn_clicked] = new_btn;
+        buttons.children[btn_clicked].classList.add('clicked');
+        buttons.children[btn_clicked].removeEventListener('click', try_letter);
         // test cia
 
         if (pokemon_name.split('').includes(letter)) {
@@ -23,6 +22,23 @@
             health--;
             document.getElementById('health').innerHTML = `Health: ${health}`;
         }
+        if (health === 0) {
+            handle_loss();
+        }
+    };
+
+    const handle_loss = () => {
+        const html = `
+            <div>
+                <h1>You have lost :/</h1>
+                <div class="flex justify-center">ASNFKASJFBK</div>
+                <div class="flex justify-center pt">Score: 123</div>
+                <div class="flex justify-center pt">
+                    <button>play again</button>
+                </div>
+            </div>
+        `;
+        root.innerHTML = html;
     };
 
     const start_game = async () => {

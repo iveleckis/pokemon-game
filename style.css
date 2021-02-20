@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body,
 html {
     height: 100%;
@@ -5,6 +7,10 @@ html {
     padding: 0;
     margin: 0;
     background: orange;
+}
+
+* {
+    font-family: 'Press Start 2P', cursive;
 }
 
 #root {
@@ -102,6 +108,9 @@ button {
     border: 2px solid rgb(0, 0, 162);
     border-radius: 5px;
     font-weight: bold;
+}
+
+.letter {
     width: 2rem;
 }
 
@@ -112,6 +121,7 @@ button:hover {
 
 .clicked,
 .clicked:hover {
+    background: red;
     opacity: 0.2;
     cursor: not-allowed;
 }

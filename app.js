@@ -2,6 +2,7 @@
     const root = document.getElementById('root');
     let pokemon_name = '';
     let health = 0;
+    let score = 0;
 
     const try_letter = (letter, btn_clicked) => {
         const slots = document.getElementById('slots');
@@ -10,10 +11,11 @@
         buttons.children[btn_clicked].classList.add('clicked');
         buttons.children[btn_clicked].removeEventListener('click', try_letter);
         // test cia
-
         if (pokemon_name.split('').includes(letter)) {
             for (let i in pokemon_name.split('')) {
                 if (pokemon_name.split('')[i] === letter) {
+                    console.log(slots.children[i]);
+
                     slots.children[i].classList.add('checked');
                     slots.children[i].innerHTML = letter;
                 }
@@ -66,13 +68,13 @@
             alphabet = alphabet.split('').sort(() => Math.random() - 0.5);
             const matrix = [];
             alphabet.forEach((item) => {
-                const button = `<button class="bg-blue">${item}</button>`;
+                const button = build_btn('', item, '');
                 matrix.push(button);
             });
 
             game_html = `
             <div class="panel">
-                <div class="flex justify-center">score:</div>
+                <div class="flex justify-center p-2">score:${score}</div>
                 <div class="flex justify-center items-center p-2">
                     <img class="square-10" src="${
                         res.data.sprites.other.dream_world.front_default
@@ -94,9 +96,10 @@
             root.innerHTML = game_html;
             const dom_matrix = document.getElementById('letter_matrix');
             matrix.forEach((item, i) => {
-                dom_matrix.children[i].addEventListener('click', () =>
-                    try_letter(dom_matrix.children[i].innerHTML, i)
-                );
+                dom_matrix.children[i].addEventListener('click', () => {
+                    console.log(dom_matrix.children[i]);
+                    try_letter(dom_matrix.children[i].innerHTML, i);
+                });
             });
         } catch (err) {
             console.log(err);

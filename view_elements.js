@@ -20,9 +20,9 @@ const difficulty_html = `<div class="flex justify-center items-center direction-
 const about_html = `<div class="w-1/2 app-w-max panel">
                         <div class="panel-title">About...</div>
                         <div class="m-2">
-                            <p>
+                            <div>
                                 Your goal is to guess as many pokemon names as possible.
-                            </p>
+                            </div>
                             <p>
                                 You will lose if you run out of time or health.
                             </p>

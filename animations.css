@@ -1,4 +1,4 @@
-@keyframes btn-before-pulse {
+/* @keyframes btn-before-pulse {
     0% {
         content: '';
         position: absolute;
@@ -22,22 +22,24 @@
     50% {
         content: '';
         position: absolute;
-        top: 0px;
+        top: -1px;
         left: -10px;
         border: 3px solid rgb(0, 0, 84);
         background: rgb(0, 0, 84);
         transform: skew(0, -45deg);
-        height: 106%;
+        height: 110%;
+        animation: none;
     }
     99% {
         content: '';
         position: absolute;
-        top: 0px;
+        top: -1px;
         left: -10px;
         border: 3px solid rgb(0, 0, 84);
         background: rgb(0, 0, 84);
         transform: skew(0, -45deg);
-        height: 106%;
+        height: 110%;
+        animation: none;
     }
     100% {
         content: '';
@@ -138,3 +140,4 @@
 .animate-btn-pulse::after {
     animation: btn-after-pulse 1.5s infinite;
 }
+ */

@@ -3,6 +3,7 @@
     let pokemon_name = '';
     let health = 0;
     let score = 0;
+    let timer = 130;
 
     const try_letter = (letter, btn_clicked) => {
         const slots = document.getElementById('slots');
@@ -38,6 +39,7 @@
         health = 0;
         pokemon_name = '';
         score = 0;
+        timer = 130;
         root.innerHTML = '';
         landing_screen();
     };
@@ -82,7 +84,10 @@
 
             game_html = `
             <div class="panel">
-                <div class="flex justify-center p-2">score:${score}</div>
+                <div class="flex justify-between p-2 w-full">
+                    <div>Score: ${score}</div>
+                    <div id="timer">${timer}</div>
+                </div>
                 <div class="flex justify-center items-center p-2">
                     <img class="square-10" src="${
                         res.data.sprites.other.dream_world.front_default
@@ -108,6 +113,7 @@
                     try_letter(dom_matrix.children[i].children[0].innerHTML, i);
                 });
             });
+            set_timer();
         } catch (err) {
             console.log(err);
         }
@@ -124,6 +130,21 @@
         document
             .querySelector('#start_the_game')
             .addEventListener('click', () => start_game());
+    };
+
+    const set_timer = () => {
+        const timer_in_dom = document.querySelector('#timer');
+        const timer_interval = setInterval(() => {
+            timer--;
+
+            if (timer === 0) {
+                handle_loss();
+                clearInterval(timer_interval);
+            } else {
+                const formatted_timer = timer < 10 ? `0${timer}` : timer;
+                timer_in_dom.innerHTML = formatted_timer;
+            }
+        }, 1000);
     };
 
     let start_toggled = false;

@@ -10,14 +10,10 @@
         const buttons = document.getElementById('letter_matrix');
         buttons.children[btn_clicked].classList.add('clicked');
         buttons.children[btn_clicked].removeEventListener('click', try_letter);
-        // test cia
-        console.log(letter);
-        console.log(pokemon_name.split(''));
+
         if (pokemon_name.split('').includes(letter)) {
             for (let i in pokemon_name.split('')) {
                 if (pokemon_name.split('')[i] === letter) {
-                    console.log(slots.children[i]);
-
                     slots.children[i].classList.add('checked');
                     slots.children[i].innerHTML = letter;
                 }
@@ -34,6 +30,16 @@
     const handle_loss = () => {
         const html = loss_html(pokemon_name);
         root.innerHTML = html;
+        const replay_button = document.querySelector('#play_again');
+        replay_button.addEventListener('click', () => reset_game());
+    };
+
+    const reset_game = () => {
+        health = 0;
+        pokemon_name = '';
+        score = 0;
+        root.innerHTML = '';
+        landing_screen();
     };
 
     const start_game = async () => {
@@ -70,7 +76,7 @@
             alphabet = alphabet.split('').sort(() => Math.random() - 0.5);
             const matrix = [];
             alphabet.forEach((item) => {
-                const button = build_btn('', item, '');
+                const button = btn_html('', item, '');
                 matrix.push(button);
             });
 

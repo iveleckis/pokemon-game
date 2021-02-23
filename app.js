@@ -2,19 +2,22 @@
     const root = document.getElementById('root');
     let pokemon_name = '';
     let health = 0;
+    let score = 0;
 
     const try_letter = (letter, btn_clicked) => {
         const slots = document.getElementById('slots');
 
-        console.log(btn_clicked);
         const buttons = document.getElementById('letter_matrix');
-        const new_btn = `<button class="letter clicked">${letter}</button>`;
-        buttons.children[btn_clicked] = new_btn;
+        buttons.children[btn_clicked].classList.add('clicked');
+        buttons.children[btn_clicked].removeEventListener('click', try_letter);
         // test cia
-
+        console.log(letter);
+        console.log(pokemon_name.split(''));
         if (pokemon_name.split('').includes(letter)) {
             for (let i in pokemon_name.split('')) {
                 if (pokemon_name.split('')[i] === letter) {
+                    console.log(slots.children[i]);
+
                     slots.children[i].classList.add('checked');
                     slots.children[i].innerHTML = letter;
                 }
@@ -23,12 +26,20 @@
             health--;
             document.getElementById('health').innerHTML = `Health: ${health}`;
         }
+        if (health === 0) {
+            handle_loss();
+        }
+    };
+
+    const handle_loss = () => {
+        const html = loss_html(pokemon_name);
+        root.innerHTML = html;
     };
 
     const start_game = async () => {
         root.innerHTML = '';
         let alphabet = 'abcdefghijklmnopqrstuvwxyz';
-        let html = ``;
+        let game_html = ``;
         try {
             const res = await axios.get(
                 `https://pokeapi.co/api/v2/pokemon/${
@@ -37,10 +48,10 @@
             );
             pokemon_name = res.data.name;
             const div = [];
-            for (let i in res.data.name.split('')) {
+            for (let i in pokemon_name.split('')) {
                 let child = `<div class="slot" id="slot"></div>`;
-                if (res.data.name.split('')[i] === '-') {
-                    child = `<div class="slot checked" id="slot"> - </div>`;
+                if (pokemon_name.split('')[i] === '-') {
+                    child = `<div class="slot" id="slot"> - </div>`;
                 }
                 div.push(child);
             }
@@ -59,37 +70,37 @@
             alphabet = alphabet.split('').sort(() => Math.random() - 0.5);
             const matrix = [];
             alphabet.forEach((item) => {
-                const button = `<button class="letter">${item}</button>`;
+                const button = build_btn('', item, '');
                 matrix.push(button);
             });
 
-            html = `
-            <div>
-                <div class="flex justify-center">score:</div>
-                <div class="flex justify-center items-center pt">
+            game_html = `
+            <div class="panel">
+                <div class="flex justify-center p-2">score:${score}</div>
+                <div class="flex justify-center items-center p-2">
                     <img class="square-10" src="${
                         res.data.sprites.other.dream_world.front_default
                             ? res.data.sprites.other.dream_world.front_default
                             : res.data.sprites.front_default
                     }" alt="x"/>
                 </div>
-                <div id="slots" class="flex justify-center pt">${div.join(
+                <div id="slots" class="flex justify-center p-1">${div.join(
                     ''
                 )}</div>
                 <div class="flex justify-center">
-                    <div class="matrix-grid pt" id="letter_matrix">${matrix.join(
+                    <div class="matrix-grid p-2" id="letter_matrix">${matrix.join(
                         ''
                     )}</div>
                 </div>
-                <div class="flex justify-center pt" id="health">Health: ${health}</div>
+                <div class="flex justify-center p-2" id="health">Health: ${health}</div>
             </div>
             `;
-            root.innerHTML = html;
+            root.innerHTML = game_html;
             const dom_matrix = document.getElementById('letter_matrix');
             matrix.forEach((item, i) => {
-                dom_matrix.children[i].addEventListener('click', () =>
-                    try_letter(dom_matrix.children[i].innerHTML, i)
-                );
+                dom_matrix.children[i].addEventListener('click', () => {
+                    try_letter(dom_matrix.children[i].children[0].innerHTML, i);
+                });
             });
         } catch (err) {
             console.log(err);
@@ -98,45 +109,62 @@
 
     const setHealth = (amount) => {
         health = amount;
-        const health_text = document.getElementById('health_text');
-        health_text.innerHTML = `You will start with ${health} health`;
-        const start_container = document.getElementById('start_button');
-        const button = document.createElement('button');
-        button.innerHTML = 'START';
-        button.addEventListener('click', () => {
-            start_game();
-        });
-        if (start_container.children.length === 0) {
-            start_container.appendChild(button);
-        } else {
-            start_container.innerHTML = '';
-            start_container.appendChild(button);
-        }
+        const start_container = document.querySelector('#start_container');
+        start_container.innerHTML = '';
+        const health_text = `<div class="p-2 text-center">You will start your game with <span class="text-red">${health}</span> health</div>`;
+        const button_html = `<button class="btn animate-btn-pulse" id="start_the_game">Start</button>`;
+        start_container.innerHTML = health_text + button_html;
+
+        document
+            .querySelector('#start_the_game')
+            .addEventListener('click', () => start_game());
     };
 
-    (() => {
-        const html = `
-            <div id="difficulty">
-                <div class="flex justify-center">
-                    <img src="./assets/logo_main.png" alt="pokemon" />
-                </div>
-                <div class="btn-group flex justify-center pt">
-                   <button id="btn_easy">EASY</button>
-                   <button id="btn_medium">MEDIUM</button>
-                   <button id="btn_hard">HARD</button>
-                </div>
-                <div class="flex justify-center items-center direction-column pt" id="health_container">
-                   <div id="health_text"></div>
-                   <div class="pt" id="start_button"></div>
-                </div>
-            </div>
-        `;
+    let start_toggled = false;
+    let about_toggled = false;
+    const landing_screen = () => {
+        let html = ``;
+        if (start_toggled) {
+            html = difficulty_html;
+        }
+        if (about_toggled) {
+            html = about_html;
+        }
+        if (!about_toggled && !start_toggled) {
+            html = landing_html;
+        }
         root.innerHTML = html;
-        const btn_1 = document.getElementById('btn_easy');
-        const btn_2 = document.getElementById('btn_medium');
-        const btn_3 = document.getElementById('btn_hard');
-        btn_1.addEventListener('click', () => setHealth(10));
-        btn_2.addEventListener('click', () => setHealth(5));
-        btn_3.addEventListener('click', () => setHealth(3));
-    })();
+
+        if (start_toggled) {
+            const btn_easy = document.getElementById('btn_easy');
+            const btn_medium = document.getElementById('btn_medium');
+            const btn_hard = document.getElementById('btn_hard');
+            const btn_back = document.getElementById('btn_back');
+            btn_easy.addEventListener('click', () => setHealth(10));
+            btn_medium.addEventListener('click', () => setHealth(5));
+            btn_hard.addEventListener('click', () => setHealth(3));
+            btn_back.addEventListener('click', () => {
+                start_toggled = !start_toggled;
+                landing_screen();
+            });
+        } else if (about_toggled) {
+            const btn_back = document.getElementById('btn_back');
+            btn_back.addEventListener('click', () => {
+                about_toggled = !about_toggled;
+                landing_screen();
+            });
+        } else {
+            const btn_start = document.getElementById('btn_start');
+            btn_start.addEventListener('click', () => {
+                start_toggled = !start_toggled;
+                landing_screen();
+            });
+            const btn_about = document.getElementById('btn_about');
+            btn_about.addEventListener('click', () => {
+                about_toggled = !about_toggled;
+                landing_screen();
+            });
+        }
+    };
+    landing_screen();
 })();

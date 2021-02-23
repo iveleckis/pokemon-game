@@ -11,6 +11,8 @@
         buttons.children[btn_clicked].classList.add('clicked');
         buttons.children[btn_clicked].removeEventListener('click', try_letter);
         // test cia
+        console.log(letter);
+        console.log(pokemon_name.split(''));
         if (pokemon_name.split('').includes(letter)) {
             for (let i in pokemon_name.split('')) {
                 if (pokemon_name.split('')[i] === letter) {
@@ -46,10 +48,10 @@
             );
             pokemon_name = res.data.name;
             const div = [];
-            for (let i in res.data.name.split('')) {
+            for (let i in pokemon_name.split('')) {
                 let child = `<div class="slot" id="slot"></div>`;
-                if (res.data.name.split('')[i] === '-') {
-                    child = `<div class="slot checked" id="slot"> - </div>`;
+                if (pokemon_name.split('')[i] === '-') {
+                    child = `<div class="slot" id="slot"> - </div>`;
                 }
                 div.push(child);
             }
@@ -97,8 +99,7 @@
             const dom_matrix = document.getElementById('letter_matrix');
             matrix.forEach((item, i) => {
                 dom_matrix.children[i].addEventListener('click', () => {
-                    console.log(dom_matrix.children[i]);
-                    try_letter(dom_matrix.children[i].innerHTML, i);
+                    try_letter(dom_matrix.children[i].children[0].innerHTML, i);
                 });
             });
         } catch (err) {

@@ -37,12 +37,20 @@ html {
 
 .slot {
     border-bottom: 2px solid darkblue;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    padding-bottom: 0.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .clicked,
 .clicked:hover {
     opacity: 0.5;
-    cursor: not-allowed;
+    cursor: default;
 }
 
 .clicked > .btn {
@@ -52,7 +60,7 @@ html {
 .clicked > .btn {
     top: 6px;
     left: -6px;
-    cursor: none;
+    cursor: default;
 }
 
 .clicked > .btn::after {

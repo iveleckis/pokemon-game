@@ -29,6 +29,7 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     };
 
     const mark_guessed_letter = (letter, letter_index) => {
+
         const slots = document.querySelector('#slots');
         slots.children[letter_index].classList.add('checked');
         slots.children[letter_index].innerHTML = letter;

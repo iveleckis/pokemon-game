@@ -45,3 +45,29 @@ const loss_html = (pokemon_name, score) => {
             </div>
         `;
 };
+
+const game_html = (
+    score,
+    timer,
+    health,
+    pokemon_image,
+    slots_html,
+    matrix_html
+) => {
+    return `
+            <div class="panel">
+                <div class="flex justify-between p-2 w-full">
+                    <div>Score:<span id="score_count">${score}</span></div>
+                    <div id="timer">${timer}</div>
+                </div>
+                <div class="flex justify-center items-center p-2">
+                    <img class="square-10" src="${pokemon_image}" alt="x"/>
+                </div>
+                <div id="slots" class="flex justify-center p-1">${slots_html}</div>
+                <div class="flex justify-center">
+                    <div class="matrix-grid p-2" id="letter_matrix">${matrix_html}</div>
+                </div>
+                <div class="flex justify-center p-2" id="health">Health: ${health}</div>
+            </div>
+            `;
+};

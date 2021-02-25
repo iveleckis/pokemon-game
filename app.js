@@ -29,7 +29,6 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     };
 
     const mark_guessed_letter = (letter, letter_index) => {
-
         const slots = document.querySelector('#slots');
         slots.children[letter_index].classList.add('checked');
         slots.children[letter_index].innerHTML = letter;
@@ -71,6 +70,13 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
         root.innerHTML = '';
 
         const api_response = await make_api_call();
+
+        if (!api_response) {
+            reset_game();
+            landing_screen();
+            return;
+        }
+
         pokemon_name = api_response.data.name;
 
         const slot_array = create_slots_array();
@@ -115,8 +121,24 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
             );
             return res;
         } catch (err) {
-            console.log(err);
+            handle_error();
         }
+    };
+
+    const handle_error = () => {
+        const body = document.getElementsByTagName('body')[0];
+        const toaster = toaster_html(
+            "Something wen't wrong :/",
+            'Please try again...'
+        );
+        body.appendChild(toaster);
+        const toaster_dom = document.querySelector('#toaster');
+        setTimeout(() => {
+            toaster_dom.classList.add('animate-hide_toaster');
+        }, 4000);
+        setTimeout(() => {
+            toaster_dom.remove();
+        }, 5000);
     };
 
     const create_slots_array = () => {
@@ -131,7 +153,6 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
         return slots_array;
     };
 
-    // refactor this
     const create_letter_matrix = (mix_in_this_pokemon_name) => {
         let all_letters = alphabet;
         while (all_letters.split('').length !== 20) {
@@ -159,15 +180,11 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
         health = health_amount;
         const start_container = document.querySelector('#start_container');
         start_container.innerHTML = '';
-        const health_text = `<div class="p-2 text-center">
-                                You will start your game with
-                                <span class="text-red">${health}</span>
-                                health and each letter guessed will give you
-                                <span class="text-red">${difficulty_level} point${
-            difficulty_level > 1 ? 's' : ''
-        }</span>
-                            </div>`;
-        const button_html = `<button class="btn animate-btn-pulse" id="start_the_game">Start</button>`;
+        const health_text = text_after_difficulty_html(
+            health_amount,
+            difficulty_lvl
+        );
+        const button_html = btn_html('start_the_game', 'Start', '');
         start_container.innerHTML = health_text + button_html;
 
         document

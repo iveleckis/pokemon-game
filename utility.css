@@ -172,6 +172,10 @@
     color: red;
 }
 
+.text-brown {
+    color: rgb(208, 122, 83);
+}
+
 .text-bold {
     font-weight: bold;
 }
@@ -192,6 +196,14 @@
     bottom: 0;
 }
 
+.top-0 {
+    top: 0;
+}
+
 .right-0 {
     right: 0;
+}
+
+.left-0 {
+    left: 0;
 }

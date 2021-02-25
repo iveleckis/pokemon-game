@@ -71,3 +71,30 @@ const game_html = (
             </div>
             `;
 };
+
+const text_after_difficulty_html = (health, difficulty_level) => {
+    return `<div class="p-2 text-center">
+                You will start your game with
+                <span class="text-red">${health}</span>
+                health and each letter guessed will give you
+                <span class="text-red">${difficulty_level} point${
+        difficulty_level > 1 ? 's' : ''
+    }</span>
+            </div>`;
+};
+
+const toaster_html = (text, subtext) => {
+    const toaster = document.createElement('toaster');
+    toaster.setAttribute('id', 'toaster');
+    toaster.className =
+        'absolute right-0 top-0 m-3 toaster animate-show_toaster';
+    const toaster_title = document.createElement('div');
+    toaster_title.className = 'font-bold';
+    toaster_title.innerHTML = text;
+    const toaster_subtext = document.createElement('div');
+    toaster_subtext.className = 'text-sm text-brown mt-2';
+    toaster_subtext.innerHTML = subtext;
+    toaster.appendChild(toaster_title);
+    toaster.appendChild(toaster_subtext);
+    return toaster;
+};

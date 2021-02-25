@@ -1,143 +1,25 @@
-/* @keyframes btn-before-pulse {
+@keyframes show_toaster {
     0% {
-        content: '';
-        position: absolute;
-        top: 0px;
-        left: -12px;
-        border: 4px solid rgb(0, 0, 84);
-        background: rgb(0, 0, 84);
-        transform: skew(0, -40deg);
-        height: 100%;
-    }
-    49% {
-        content: '';
-        position: absolute;
-        top: 0px;
-        left: -12px;
-        border: 4px solid rgb(0, 0, 84);
-        background: rgb(0, 0, 84);
-        transform: skew(0, -40deg);
-        height: 100%;
-    }
-    50% {
-        content: '';
-        position: absolute;
-        top: -1px;
-        left: -10px;
-        border: 3px solid rgb(0, 0, 84);
-        background: rgb(0, 0, 84);
-        transform: skew(0, -45deg);
-        height: 110%;
-        animation: none;
-    }
-    99% {
-        content: '';
-        position: absolute;
-        top: -1px;
-        left: -10px;
-        border: 3px solid rgb(0, 0, 84);
-        background: rgb(0, 0, 84);
-        transform: skew(0, -45deg);
-        height: 110%;
-        animation: none;
+        transform: translateX(30rem);
     }
     100% {
-        content: '';
-        position: absolute;
-        top: 0px;
-        left: -12px;
-        border: 4px solid rgb(0, 0, 84);
-        background: rgb(0, 0, 84);
-        transform: skew(0, -40deg);
-        height: 100%;
+        transform: translateX(0rem);
     }
 }
 
-@keyframes btn-after-pulse {
+.animate-show_toaster {
+    animation: show_toaster 1s;
+}
+
+@keyframes hide_toaster {
     0% {
-        content: '';
-        position: absolute;
-        bottom: -12px;
-        left: -8px;
-        border: 4px solid rgb(0, 0, 84);
-        background: rgb(0, 0, 84);
-        transform: skew(-45deg, 0);
-        width: 100%;
-    }
-    49% {
-        content: '';
-        position: absolute;
-        bottom: -12px;
-        left: -8px;
-        border: 4px solid rgb(0, 0, 84);
-        background: rgb(0, 0, 84);
-        transform: skew(-45deg, 0);
-        width: 100%;
-    }
-    50% {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: -6px;
-        border: 3px solid rgb(0, 0, 84);
-        background: rgb(0, 0, 84);
-        transform: skew(-45deg, 0);
-        width: 100%;
-    }
-    99% {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: -6px;
-        border: 3px solid rgb(0, 0, 84);
-        background: rgb(0, 0, 84);
-        transform: skew(-45deg, 0);
-        width: 100%;
+        transform: translateX(0rem);
     }
     100% {
-        content: '';
-        position: absolute;
-        bottom: -12px;
-        left: -8px;
-        border: 4px solid rgb(0, 0, 84);
-        background: rgb(0, 0, 84);
-        transform: skew(-45deg, 0);
-        width: 100%;
+        transform: translateX(30rem);
     }
 }
 
-@keyframes btn-pulse {
-    0% {
-        top: 0px;
-        left: 0px;
-    }
-    49% {
-        top: 0px;
-        left: 0px;
-    }
-    50% {
-        top: 2px;
-        left: -2px;
-    }
-    99% {
-        top: 2px;
-        left: -2px;
-    }
-    100% {
-        top: 0px;
-        left: 0px;
-    }
+.animate-hide_toaster {
+    animation: hide_toaster 1s;
 }
-
-.animate-btn-pulse {
-    animation: btn-pulse 1.5s infinite;
-}
-
-.animate-btn-pulse::before {
-    animation: btn-before-pulse 1.5s infinite;
-}
-
-.animate-btn-pulse::after {
-    animation: btn-after-pulse 1.5s infinite;
-}
- */

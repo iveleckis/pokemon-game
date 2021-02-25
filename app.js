@@ -29,7 +29,6 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     };
 
     const mark_guessed_letter = (letter, letter_index) => {
-
         const slots = document.querySelector('#slots');
         slots.children[letter_index].classList.add('checked');
         slots.children[letter_index].innerHTML = letter;
@@ -159,15 +158,11 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
         health = health_amount;
         const start_container = document.querySelector('#start_container');
         start_container.innerHTML = '';
-        const health_text = `<div class="p-2 text-center">
-                                You will start your game with
-                                <span class="text-red">${health}</span>
-                                health and each letter guessed will give you
-                                <span class="text-red">${difficulty_level} point${
-            difficulty_level > 1 ? 's' : ''
-        }</span>
-                            </div>`;
-        const button_html = `<button class="btn animate-btn-pulse" id="start_the_game">Start</button>`;
+        const health_text = text_after_difficulty_html(
+            health_amount,
+            difficulty_lvl
+        );
+        const button_html = btn_html('start_the_game', 'Start', '');
         start_container.innerHTML = health_text + button_html;
 
         document

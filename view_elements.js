@@ -71,3 +71,14 @@ const game_html = (
             </div>
             `;
 };
+
+const text_after_difficulty_html = (health, difficulty_level) => {
+    return `<div class="p-2 text-center">
+                You will start your game with
+                <span class="text-red">${health}</span>
+                health and each letter guessed will give you
+                <span class="text-red">${difficulty_level} point${
+        difficulty_level > 1 ? 's' : ''
+    }</span>
+            </div>`;
+};

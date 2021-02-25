@@ -70,6 +70,13 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
         root.innerHTML = '';
 
         const api_response = await make_api_call();
+
+        if (!api_response) {
+            reset_game();
+            landing_screen();
+            return;
+        }
+
         pokemon_name = api_response.data.name;
 
         const slot_array = create_slots_array();
@@ -114,8 +121,24 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
             );
             return res;
         } catch (err) {
-            console.log(err);
+            handle_error();
         }
+    };
+
+    const handle_error = () => {
+        const body = document.getElementsByTagName('body')[0];
+        const toaster = toaster_html(
+            "Something wen't wrong :/",
+            'Please try again...'
+        );
+        body.appendChild(toaster);
+        const toaster_dom = document.querySelector('#toaster');
+        setTimeout(() => {
+            toaster_dom.classList.add('animate-hide_toaster');
+        }, 4000);
+        setTimeout(() => {
+            toaster_dom.remove();
+        }, 5000);
     };
 
     const create_slots_array = () => {

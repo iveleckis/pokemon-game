@@ -130,7 +130,6 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
         return slots_array;
     };
 
-    // refactor this
     const create_letter_matrix = (mix_in_this_pokemon_name) => {
         let all_letters = alphabet;
         while (all_letters.split('').length !== 20) {

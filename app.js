@@ -7,6 +7,7 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     let score = 0;
     let timer = 130;
     let difficulty_level = 0;
+    let letter_slots;
 
     const try_letter = (letter, btn_clicked) => {
         const buttons = document.querySelector('#letter_matrix');
@@ -18,6 +19,11 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
                     mark_guessed_letter(letter, i);
                     add_score(difficulty_level);
                     add_time(difficulty_level * 2);
+                    letter_slots[i] = letter;
+                    console.log(letter_slots);
+                    if (!letter_slots.includes(undefined)) {
+                        handle_win();
+                    }
                 }
             }
         } else {
@@ -54,6 +60,11 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
         root.innerHTML = html;
         const replay_button = document.querySelector('#play_again');
         replay_button.addEventListener('click', () => reset_game());
+    };
+
+    const handle_win = () => {
+        console.log('win!');
+        start_game();
     };
 
     const reset_game = () => {
@@ -127,6 +138,7 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
             }
             slots_array.push(slot);
         }
+        letter_slots = new Array(pokemon_name.split('').length).fill();
         return slots_array;
     };
 

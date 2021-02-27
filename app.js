@@ -63,7 +63,6 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     };
 
     const handle_win = () => {
-        console.log('win!');
         start_game();
     };
 

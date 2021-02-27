@@ -57,8 +57,21 @@ const game_html = (
     return `
             <div class="panel">
                 <div class="flex justify-between p-2 w-full">
-                    <div>Score:<span id="score_count">${score}</span></div>
-                    <div id="timer">${timer}</div>
+                    <div>
+                        Score:
+                        <span class="relative" id="score_value_container">
+                            <span id="score_value">
+                                ${score}
+                            </span>
+                        </span>
+                    </div>
+                    <div id="timer_container">
+                        <span class="relative" id="timer_value_container">
+                            <span id="timer_value">
+                                ${timer}
+                            </span>
+                        </span>
+                    </div>
                 </div>
                 <div class="flex justify-center items-center p-2">
                     <img class="square-10" src="${pokemon_image}" alt="x"/>
@@ -67,7 +80,14 @@ const game_html = (
                 <div class="flex justify-center">
                     <div class="matrix-grid p-2" id="letter_matrix">${matrix_html}</div>
                 </div>
-                <div class="flex justify-center p-2" id="health">Health: ${health}</div>
+                <div class="flex justify-center p-3 mt-2" id="health">
+                    Health:
+                    <span class="relative" id="health_value_container">
+                        <span id="health_value">
+                            ${health}
+                        </span>
+                    </span>
+                </div>
             </div>
             `;
 };
@@ -97,4 +117,14 @@ const toaster_html = (text, subtext) => {
     toaster.appendChild(toaster_title);
     toaster.appendChild(toaster_subtext);
     return toaster;
+};
+
+const add_score_animtaion_html = (what_to_animate) => {
+    const animation_container = document.createElement('div');
+    animation_container.className =
+        'absolute top-0 right-0 animate-plus_number_up text-red opacity-0';
+    animation_container.innerHTML = what_to_animate;
+    const random_id = Math.floor(Math.random() * 9999);
+    animation_container.setAttribute('id', `animation_${random_id}`);
+    return { html: animation_container, html_id: `animation_${random_id}` };
 };

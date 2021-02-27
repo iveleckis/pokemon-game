@@ -209,6 +209,7 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
             if (timer === 0) {
                 handle_loss();
+
                 clearInterval(timer_interval);
             } else {
                 const formatted_timer = timer < 10 ? `0${timer}` : timer;

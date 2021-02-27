@@ -8,6 +8,7 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     let timer = 130;
     let difficulty_level = 0;
     let letter_slots;
+    let timer_interval;
 
     const try_letter = (letter, btn_clicked) => {
         const buttons = document.querySelector('#letter_matrix');
@@ -117,8 +118,9 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
                 try_letter(dom_matrix.children[i].children[0].innerHTML, i);
             });
         });
-
-        set_timer();
+        if (!timer_interval) {
+            set_timer();
+        }
     };
 
     const make_api_call = async () => {
@@ -203,13 +205,11 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     };
 
     const set_timer = () => {
-        const timer_in_dom = document.querySelector('#timer');
-        const timer_interval = setInterval(() => {
+        timer_interval = setInterval(() => {
+            const timer_in_dom = document.querySelector('#timer');
             timer--;
-
             if (timer === 0) {
                 handle_loss();
-
                 clearInterval(timer_interval);
             } else {
                 const formatted_timer = timer < 10 ? `0${timer}` : timer;
@@ -239,7 +239,7 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
             const btn_hard = document.querySelector('#btn_hard');
             const btn_back = document.querySelector('#btn_back');
             btn_easy.addEventListener('click', () =>
-                set_health_and_difficulty(10, 1)
+                set_health_and_difficulty(100, 1)
             );
             btn_medium.addEventListener('click', () =>
                 set_health_and_difficulty(5, 2)

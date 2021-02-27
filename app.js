@@ -20,7 +20,6 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
                     add_score(difficulty_level);
                     add_time(difficulty_level * 2);
                     letter_slots[i] = letter;
-                    console.log(letter_slots);
                     if (!letter_slots.includes(undefined)) {
                         handle_win();
                     }

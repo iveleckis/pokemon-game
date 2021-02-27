@@ -41,18 +41,68 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     };
 
     const remove_one_health = () => {
+        const health_container_dom = document.querySelector(
+            '#health_value_container'
+        );
+        const health_value_dom = document.querySelector('#health_value');
         health--;
-        document.querySelector('#health').innerHTML = `Health: ${health}`;
+        health_value_dom.innerHTML = health;
+
+        const create_animation_html = add_score_animtaion_html('-1');
+        health_container_dom.appendChild(create_animation_html.html);
+
+        const find_animation = document.querySelector(
+            `#${create_animation_html.html_id}`
+        );
+        setTimeout(() => {
+            health_container_dom.removeChild(find_animation);
+        }, 2000);
     };
 
     const add_score = (points_to_add) => {
-        const score_in_dom = document.querySelector('#score_count');
+        const score_container_dom = document.querySelector(
+            '#score_value_container'
+        );
+        const score_value_dom = document.querySelector('#score_value');
+
         score += points_to_add;
-        score_in_dom.innerHTML = score;
+        score_value_dom.innerHTML = score;
+
+        const create_animation_html = add_score_animtaion_html(
+            `+${points_to_add}`
+        );
+        score_container_dom.appendChild(create_animation_html.html);
+
+        const find_animation = document.querySelector(
+            `#${create_animation_html.html_id}`
+        );
+
+        setTimeout(() => {
+            score_container_dom.removeChild(find_animation);
+        }, 2000);
     };
 
     const add_time = (time_to_add) => {
+        const timer_container_dom = document.querySelector(
+            '#timer_value_container'
+        );
+        const timer_value_dom = document.querySelector('#timer_value');
+
         timer += time_to_add * 2;
+        timer_value_dom.innerHTML = timer;
+
+        const create_animation_html = add_score_animtaion_html(
+            `+${time_to_add * 2}`
+        );
+        timer_container_dom.appendChild(create_animation_html.html);
+
+        const find_animation = document.querySelector(
+            `#${create_animation_html.html_id}`
+        );
+
+        setTimeout(() => {
+            timer_container_dom.removeChild(find_animation);
+        }, 2000);
     };
 
     const handle_loss = () => {
@@ -206,7 +256,7 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
     const set_timer = () => {
         timer_interval = setInterval(() => {
-            const timer_in_dom = document.querySelector('#timer');
+            const timer_in_dom = document.querySelector('#timer_value');
             timer--;
             if (timer === 0) {
                 handle_loss();

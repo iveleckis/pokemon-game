@@ -53,3 +53,9 @@
         transform: scale(1);
     }
 }
+
+@keyframes spin_loader {
+    0% {
+        transform: rotate(360deg);
+    }
+}

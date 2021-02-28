@@ -10,60 +10,41 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     let letter_slots;
     let timer_interval;
 
-    let start_toggled = false;
-    let about_toggled = false;
-
     const landing_screen = () => {
-        let html = ``;
-        if (start_toggled) {
-            html = difficulty_html;
-        }
-        if (about_toggled) {
-            html = about_html;
-        }
-        if (!about_toggled && !start_toggled) {
-            html = landing_html;
-        }
-        root.innerHTML = html;
+        root.innerHTML = landing_html;
 
-        if (start_toggled) {
-            const btn_easy = document.querySelector('#btn_easy');
-            const btn_medium = document.querySelector('#btn_medium');
-            const btn_hard = document.querySelector('#btn_hard');
-            const btn_back = document.querySelector('#btn_back');
-            btn_easy.addEventListener('click', () =>
-                set_health_and_difficulty(100, 1)
-            );
-            btn_medium.addEventListener('click', () =>
-                set_health_and_difficulty(5, 2)
-            );
-            btn_hard.addEventListener('click', () =>
-                set_health_and_difficulty(3, 3)
-            );
-            btn_back.addEventListener('click', () => {
-                start_toggled = !start_toggled;
-                landing_screen();
-            });
-        } else if (about_toggled) {
-            const btn_back = document.querySelector('#btn_back');
-            btn_back.addEventListener('click', () => {
-                about_toggled = !about_toggled;
-                landing_screen();
-            });
-        } else {
-            const btn_start = document.querySelector('#btn_start');
-            btn_start.addEventListener('click', () => {
-                start_toggled = !start_toggled;
-                landing_screen();
-            });
-            const btn_about = document.querySelector('#btn_about');
-            btn_about.addEventListener('click', () => {
-                about_toggled = !about_toggled;
-                landing_screen();
-            });
-        }
+        const start_btn = document.querySelector('#btn_start');
+        start_btn.addEventListener('click', () => start_screen());
+
+        const about_btn = document.querySelector('#btn_about');
+        about_btn.addEventListener('click', () => about_screen());
     };
+
     landing_screen();
+
+    const start_screen = () => {
+        root.innerHTML = difficulty_html;
+        const btn_easy = document.querySelector('#btn_easy');
+        const btn_medium = document.querySelector('#btn_medium');
+        const btn_hard = document.querySelector('#btn_hard');
+        const btn_back = document.querySelector('#btn_back');
+        btn_easy.addEventListener('click', () =>
+            set_health_and_difficulty(100, 1)
+        );
+        btn_medium.addEventListener('click', () =>
+            set_health_and_difficulty(5, 2)
+        );
+        btn_hard.addEventListener('click', () =>
+            set_health_and_difficulty(3, 3)
+        );
+        btn_back.addEventListener('click', () => landing_screen());
+    };
+
+    const about_screen = () => {
+        root.innerHTML = about_html;
+        const btn_back = document.querySelector('#btn_back');
+        btn_back.addEventListener('click', () => landing_screen());
+    };
 
     const set_health_and_difficulty = (health_amount, difficulty_lvl) => {
         difficulty_level = difficulty_lvl;

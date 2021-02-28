@@ -10,124 +10,76 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     let letter_slots;
     let timer_interval;
 
-    const try_letter = (letter, btn_clicked) => {
-        const buttons = document.querySelector('#letter_matrix');
-        buttons.children[btn_clicked].removeEventListener('click', try_letter);
-        buttons.children[btn_clicked].children[0].setAttribute(
-            'disabled',
-            true
-        );
+    let start_toggled = false;
+    let about_toggled = false;
 
-        if (pokemon_name.split('').includes(letter)) {
-            for (let i in pokemon_name.split('')) {
-                if (pokemon_name.split('')[i] === letter) {
-                    mark_guessed_letter(letter, i);
-                    add_score(difficulty_level);
-                    add_time(difficulty_level * 2);
-                    letter_slots[i] = letter;
-                    if (!letter_slots.includes(undefined)) {
-                        handle_win();
-                    }
-                }
-            }
-        } else {
-            remove_one_health();
+    const landing_screen = () => {
+        let html = ``;
+        if (start_toggled) {
+            html = difficulty_html;
         }
-        if (health === 0) {
-            handle_loss();
+        if (about_toggled) {
+            html = about_html;
         }
-    };
-
-    const mark_guessed_letter = (letter, letter_index) => {
-        const slots = document.querySelector('#slots');
-        slots.children[letter_index].classList.add('checked');
-        slots.children[letter_index].innerHTML = letter;
-    };
-
-    const remove_one_health = () => {
-        const health_container_dom = document.querySelector(
-            '#health_value_container'
-        );
-        const health_value_dom = document.querySelector('#health_value');
-        health--;
-        health_value_dom.innerHTML = health;
-
-        const create_animation_html = add_score_animtaion_html('-1');
-        health_container_dom.appendChild(create_animation_html.html);
-
-        const find_animation = document.querySelector(
-            `#${create_animation_html.html_id}`
-        );
-        setTimeout(() => {
-            health_container_dom.removeChild(find_animation);
-        }, 2000);
-    };
-
-    const add_score = (points_to_add) => {
-        const score_container_dom = document.querySelector(
-            '#score_value_container'
-        );
-        const score_value_dom = document.querySelector('#score_value');
-
-        score += points_to_add;
-        score_value_dom.innerHTML = score;
-
-        const create_animation_html = add_score_animtaion_html(
-            `+${points_to_add}`
-        );
-        score_container_dom.appendChild(create_animation_html.html);
-
-        const find_animation = document.querySelector(
-            `#${create_animation_html.html_id}`
-        );
-
-        setTimeout(() => {
-            score_container_dom.removeChild(find_animation);
-        }, 2000);
-    };
-
-    const add_time = (time_to_add) => {
-        const timer_container_dom = document.querySelector(
-            '#timer_value_container'
-        );
-        const timer_value_dom = document.querySelector('#timer_value');
-
-        timer += time_to_add * 2;
-        timer_value_dom.innerHTML = timer;
-
-        const create_animation_html = add_score_animtaion_html(
-            `+${time_to_add * 2}`
-        );
-        timer_container_dom.appendChild(create_animation_html.html);
-
-        const find_animation = document.querySelector(
-            `#${create_animation_html.html_id}`
-        );
-
-        setTimeout(() => {
-            timer_container_dom.removeChild(find_animation);
-        }, 2000);
-    };
-
-    const handle_loss = () => {
-        const html = loss_html(pokemon_name, score);
+        if (!about_toggled && !start_toggled) {
+            html = landing_html;
+        }
         root.innerHTML = html;
-        const replay_button = document.querySelector('#play_again');
-        replay_button.addEventListener('click', () => reset_game());
-    };
 
-    const handle_win = () => {
-        start_game();
+        if (start_toggled) {
+            const btn_easy = document.querySelector('#btn_easy');
+            const btn_medium = document.querySelector('#btn_medium');
+            const btn_hard = document.querySelector('#btn_hard');
+            const btn_back = document.querySelector('#btn_back');
+            btn_easy.addEventListener('click', () =>
+                set_health_and_difficulty(100, 1)
+            );
+            btn_medium.addEventListener('click', () =>
+                set_health_and_difficulty(5, 2)
+            );
+            btn_hard.addEventListener('click', () =>
+                set_health_and_difficulty(3, 3)
+            );
+            btn_back.addEventListener('click', () => {
+                start_toggled = !start_toggled;
+                landing_screen();
+            });
+        } else if (about_toggled) {
+            const btn_back = document.querySelector('#btn_back');
+            btn_back.addEventListener('click', () => {
+                about_toggled = !about_toggled;
+                landing_screen();
+            });
+        } else {
+            const btn_start = document.querySelector('#btn_start');
+            btn_start.addEventListener('click', () => {
+                start_toggled = !start_toggled;
+                landing_screen();
+            });
+            const btn_about = document.querySelector('#btn_about');
+            btn_about.addEventListener('click', () => {
+                about_toggled = !about_toggled;
+                landing_screen();
+            });
+        }
     };
+    landing_screen();
 
-    const reset_game = () => {
-        pokemon_name = '';
-        health = 0;
-        score = 0;
-        timer = 130;
-        difficulty_level = 0;
-        root.innerHTML = '';
-        landing_screen();
+    const set_health_and_difficulty = (health_amount, difficulty_lvl) => {
+        difficulty_level = difficulty_lvl;
+        health = health_amount;
+        const start_container = document.querySelector('#start_container');
+        start_container.innerHTML = '';
+        const health_text = text_after_difficulty_html(
+            health_amount,
+            difficulty_lvl
+        );
+        const button_html = btn_html('start_the_game', 'Start', '');
+        start_container.innerHTML = health_text + button_html;
+
+        document
+            .querySelector('#start_the_game')
+            .addEventListener('click', () => start_game());
     };
 
     const start_game = async () => {
@@ -244,21 +196,32 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
         return matrix;
     };
 
-    const set_health_and_difficulty = (health_amount, difficulty_lvl) => {
-        difficulty_level = difficulty_lvl;
-        health = health_amount;
-        const start_container = document.querySelector('#start_container');
-        start_container.innerHTML = '';
-        const health_text = text_after_difficulty_html(
-            health_amount,
-            difficulty_lvl
+    const try_letter = (letter, btn_clicked) => {
+        const buttons = document.querySelector('#letter_matrix');
+        buttons.children[btn_clicked].removeEventListener('click', try_letter);
+        buttons.children[btn_clicked].children[0].setAttribute(
+            'disabled',
+            true
         );
-        const button_html = btn_html('start_the_game', 'Start', '');
-        start_container.innerHTML = health_text + button_html;
 
-        document
-            .querySelector('#start_the_game')
-            .addEventListener('click', () => start_game());
+        if (pokemon_name.split('').includes(letter)) {
+            for (let i in pokemon_name.split('')) {
+                if (pokemon_name.split('')[i] === letter) {
+                    mark_guessed_letter(letter, i);
+                    add_score(difficulty_level);
+                    add_time(difficulty_level * 2);
+                    letter_slots[i] = letter;
+                    if (!letter_slots.includes(undefined)) {
+                        handle_win();
+                    }
+                }
+            }
+        } else {
+            remove_one_health();
+        }
+        if (health === 0) {
+            handle_loss();
+        }
     };
 
     const set_timer = () => {
@@ -277,57 +240,95 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
         }, 1000);
     };
 
-    let start_toggled = false;
-    let about_toggled = false;
-    const landing_screen = () => {
-        let html = ``;
-        if (start_toggled) {
-            html = difficulty_html;
-        }
-        if (about_toggled) {
-            html = about_html;
-        }
-        if (!about_toggled && !start_toggled) {
-            html = landing_html;
-        }
-        root.innerHTML = html;
-
-        if (start_toggled) {
-            const btn_easy = document.querySelector('#btn_easy');
-            const btn_medium = document.querySelector('#btn_medium');
-            const btn_hard = document.querySelector('#btn_hard');
-            const btn_back = document.querySelector('#btn_back');
-            btn_easy.addEventListener('click', () =>
-                set_health_and_difficulty(100, 1)
-            );
-            btn_medium.addEventListener('click', () =>
-                set_health_and_difficulty(5, 2)
-            );
-            btn_hard.addEventListener('click', () =>
-                set_health_and_difficulty(3, 3)
-            );
-            btn_back.addEventListener('click', () => {
-                start_toggled = !start_toggled;
-                landing_screen();
-            });
-        } else if (about_toggled) {
-            const btn_back = document.querySelector('#btn_back');
-            btn_back.addEventListener('click', () => {
-                about_toggled = !about_toggled;
-                landing_screen();
-            });
-        } else {
-            const btn_start = document.querySelector('#btn_start');
-            btn_start.addEventListener('click', () => {
-                start_toggled = !start_toggled;
-                landing_screen();
-            });
-            const btn_about = document.querySelector('#btn_about');
-            btn_about.addEventListener('click', () => {
-                about_toggled = !about_toggled;
-                landing_screen();
-            });
-        }
+    const mark_guessed_letter = (letter, letter_index) => {
+        const slots = document.querySelector('#slots');
+        slots.children[letter_index].classList.add('checked');
+        slots.children[letter_index].innerHTML = letter;
     };
-    landing_screen();
+
+    const add_score = (points_to_add) => {
+        const score_container_dom = document.querySelector(
+            '#score_value_container'
+        );
+        const score_value_dom = document.querySelector('#score_value');
+
+        score += points_to_add;
+        score_value_dom.innerHTML = score;
+
+        const create_animation_html = add_score_animtaion_html(
+            `+${points_to_add}`
+        );
+        score_container_dom.appendChild(create_animation_html.html);
+
+        const find_animation = document.querySelector(
+            `#${create_animation_html.html_id}`
+        );
+
+        setTimeout(() => {
+            score_container_dom.removeChild(find_animation);
+        }, 2000);
+    };
+
+    const add_time = (time_to_add) => {
+        const timer_container_dom = document.querySelector(
+            '#timer_value_container'
+        );
+        const timer_value_dom = document.querySelector('#timer_value');
+
+        timer += time_to_add * 2;
+        timer_value_dom.innerHTML = timer;
+
+        const create_animation_html = add_score_animtaion_html(
+            `+${time_to_add * 2}`
+        );
+        timer_container_dom.appendChild(create_animation_html.html);
+
+        const find_animation = document.querySelector(
+            `#${create_animation_html.html_id}`
+        );
+
+        setTimeout(() => {
+            timer_container_dom.removeChild(find_animation);
+        }, 2000);
+    };
+
+    const handle_win = () => {
+        start_game();
+    };
+
+    const remove_one_health = () => {
+        const health_container_dom = document.querySelector(
+            '#health_value_container'
+        );
+        const health_value_dom = document.querySelector('#health_value');
+        health--;
+        health_value_dom.innerHTML = health;
+
+        const create_animation_html = add_score_animtaion_html('-1');
+        health_container_dom.appendChild(create_animation_html.html);
+
+        const find_animation = document.querySelector(
+            `#${create_animation_html.html_id}`
+        );
+        setTimeout(() => {
+            health_container_dom.removeChild(find_animation);
+        }, 2000);
+    };
+
+    const handle_loss = () => {
+        const html = loss_html(pokemon_name, score);
+        root.innerHTML = html;
+        const replay_button = document.querySelector('#play_again');
+        replay_button.addEventListener('click', () => reset_game());
+    };
+
+    const reset_game = () => {
+        pokemon_name = '';
+        health = 0;
+        score = 0;
+        timer = 130;
+        difficulty_level = 0;
+        root.innerHTML = '';
+        landing_screen();
+    };
 })();

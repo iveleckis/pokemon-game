@@ -64,7 +64,7 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     };
 
     const start_game = async () => {
-        root.innerHTML = '';
+        root.innerHTML = loading_html();
 
         const api_response = await make_api_call();
 

@@ -148,3 +148,15 @@ const add_score_animtaion_html = (what_to_animate) => {
     animation_container.setAttribute('id', `animation_${random_id}`);
     return { html: animation_container, html_id: `animation_${random_id}` };
 };
+
+const loading_html = () => {
+    return `
+        <div class="loading_container">
+            <div class="loading_inner_tow_colored_ball">
+                <div class="loading_inner_block">
+                    <div class="loading_inner_block_ball"></div>
+                </div>
+            </div>
+        </div>
+    `;
+};

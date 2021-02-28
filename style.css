@@ -48,19 +48,19 @@ html {
     align-items: center;
 }
 
-.clicked > .btn,
-.clicked > .btn:hover {
+button:disabled,
+button:disabled:hover {
     top: 6px;
     left: -6px;
     cursor: default;
     opacity: 0.5;
 }
 
-.clicked > .btn::after {
+button:disabled::after {
     display: none;
 }
 
-.clicked > .btn::before {
+button:disabled::before {
     display: none;
 }
 

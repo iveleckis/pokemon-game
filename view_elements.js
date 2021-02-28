@@ -1,15 +1,23 @@
 const btn_html = (id, text, className) => {
-    return `<div class="relative w-full ${className}"><button class="btn" id="${id}">${text}</button></div>`;
+    return `<div class="relative w-full ${className}">
+                <button class="btn" id="${id}">
+                    ${text}
+                </button>
+            </div>`;
 };
 
 const landing_html = `<div class="flex justify-center items-center direction-column w-1/2 app-w-max panel">
-                        <div class="panel-title">pokemon game</div>
-                        <button class="btn animate-btn-pulse" id="btn_start">start</button>
+                        <div class="panel-title">
+                            pokemon game
+                        </div>
+                        ${btn_html('btn_start', 'start', 'mt-3')}
                         ${btn_html('btn_about', 'about', 'mt-3')}
                     </div>`;
 
 const difficulty_html = `<div class="flex justify-center items-center direction-column w-1/2 app-w-max panel">
-                            <div class="panel-title">Difficulty</div>
+                            <div class="panel-title">
+                                Difficulty
+                            </div>
                             ${btn_html('btn_easy', 'easy', 'm-2')}
                             ${btn_html('btn_medium', 'medium', 'm-2')}
                             ${btn_html('btn_hard', 'hard', 'm-2')}
@@ -36,9 +44,18 @@ const about_html = `<div class="w-1/2 app-w-max panel">
 const loss_html = (pokemon_name, score) => {
     return `
             <div class="panel">
-                <div class="panel-title">You have lost :/</div>
-                <h3 class="flex justify-center">You didn't guess <span class="text-red ml-3">${pokemon_name}</span></h3>
-                <div class="flex justify-center">Score: ${score}</div>
+                <div class="panel-title">
+                    You have lost :/
+                </div>
+                <h3 class="flex justify-center">
+                    You didn't guess
+                    <span class="text-red ml-3">
+                        ${pokemon_name}
+                    </span>
+                </h3>
+                <div class="flex justify-center">
+                    Score: ${score}
+                </div>
                 <div class="flex justify-center pt">
                     ${btn_html('play_again', 'Play again', 'm-3')}
                 </div>
@@ -76,9 +93,13 @@ const game_html = (
                 <div class="flex justify-center items-center p-2">
                     <img class="square-10" src="${pokemon_image}" alt="x"/>
                 </div>
-                <div id="slots" class="flex justify-center p-1">${slots_html}</div>
+                <div id="slots" class="flex justify-center p-1">
+                    ${slots_html}
+                </div>
                 <div class="flex justify-center">
-                    <div class="matrix-grid p-2" id="letter_matrix">${matrix_html}</div>
+                    <div class="matrix-grid p-2" id="letter_matrix">
+                        ${matrix_html}
+                    </div>
                 </div>
                 <div class="flex justify-center p-3 mt-2" id="health">
                     Health:
@@ -95,9 +116,12 @@ const game_html = (
 const text_after_difficulty_html = (health, difficulty_level) => {
     return `<div class="p-2 text-center">
                 You will start your game with
-                <span class="text-red">${health}</span>
+                <span class="text-red">
+                    ${health}
+                </span>
                 health and each letter guessed will give you
-                <span class="text-red">${difficulty_level} point${
+                <span class="text-red">
+                    ${difficulty_level} point${
         difficulty_level > 1 ? 's' : ''
     }</span>
             </div>`;

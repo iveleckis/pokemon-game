@@ -12,8 +12,11 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
     const try_letter = (letter, btn_clicked) => {
         const buttons = document.querySelector('#letter_matrix');
-        buttons.children[btn_clicked].classList.add('clicked');
         buttons.children[btn_clicked].removeEventListener('click', try_letter);
+        buttons.children[btn_clicked].children[0].setAttribute(
+            'disabled',
+            true
+        );
         if (pokemon_name.split('').includes(letter)) {
             for (let i in pokemon_name.split('')) {
                 if (pokemon_name.split('')[i] === letter) {
@@ -262,8 +265,10 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
                 handle_loss();
                 clearInterval(timer_interval);
             } else {
-                const formatted_timer = timer < 10 ? `0${timer}` : timer;
-                timer_in_dom.innerHTML = formatted_timer;
+                if (timer_in_dom) {
+                    const formatted_timer = timer < 10 ? `0${timer}` : timer;
+                    timer_in_dom.innerHTML = formatted_timer;
+                }
             }
         }, 1000);
     };

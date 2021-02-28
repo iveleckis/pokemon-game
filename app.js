@@ -208,14 +208,17 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
     const create_slots_array = () => {
         const slots_array = [];
+        letter_slots = new Array(pokemon_name.split('').length).fill();
+
         for (let i in pokemon_name.split('')) {
             let slot = `<div class="slot" id="slot"></div>`;
             if (pokemon_name.split('')[i] === '-') {
                 slot = `<div class="slot" id="slot"> - </div>`;
+                letter_slots[i] = '-';
             }
             slots_array.push(slot);
         }
-        letter_slots = new Array(pokemon_name.split('').length).fill();
+
         return slots_array;
     };
 

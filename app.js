@@ -17,6 +17,7 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
             'disabled',
             true
         );
+
         if (pokemon_name.split('').includes(letter)) {
             for (let i in pokemon_name.split('')) {
                 if (pokemon_name.split('')[i] === letter) {

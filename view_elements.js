@@ -1,9 +1,5 @@
 const btn_html = (id, text, className) => {
-    return `<div class="relative w-full ${className}">
-                <button class="btn" id="${id}">
-                    ${text}
-                </button>
-            </div>`;
+    return `<div class="relative w-full ${className}"><button class="btn" id="${id}">${text}</button></div>`;
 };
 
 const landing_html = `<div class="flex justify-center items-center direction-column w-1/2 app-w-max panel">

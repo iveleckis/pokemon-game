@@ -8,6 +8,7 @@ const landing_html = `<div class="flex justify-center items-center direction-col
                         </div>
                         ${btn_html('btn_start', 'start', 'mt-3')}
                         ${btn_html('btn_about', 'about', 'mt-3')}
+                        ${btn_html('btn_options', 'options', 'mt-3')}
                     </div>`;
 
 const difficulty_html = `<div class="flex justify-center items-center direction-column w-1/2 app-w-max panel">
@@ -36,6 +37,14 @@ const about_html = `<div class="w-1/2 app-w-max panel">
                         </div>
                         ${btn_html('btn_back', 'back', 'm-2 mt-3')}
                     </div>`;
+
+const options_html = `<div class="flex justify-center items-center direction-column w-1/2 app-w-max panel">
+                            <div class="panel-title">
+                                Options
+                            </div>
+                            ${btn_html('btn_language', 'language', 'm-2')}
+                            ${btn_html('btn_back', 'back', 'mt-3')}
+                        </div>`;
 
 const loss_html = (pokemon_name, score) => {
     return `

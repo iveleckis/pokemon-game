@@ -1,0 +1,42 @@
+.loading_container {
+    background: black;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    padding: 0.6rem;
+    animation: spin_loader 2s infinite linear;
+}
+
+.loading_inner_tow_colored_ball {
+    height: 100%;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(255, 0, 0, 1) 50%
+    );
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.loading_inner_block {
+    width: 100%;
+    height: 2rem;
+    background: black;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.loading_inner_block_ball {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    background: black;
+    position: absolute;
+    top: -1rem;
+    left: 50%;
+    margin-left: -2rem;
+}

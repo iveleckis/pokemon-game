@@ -96,7 +96,7 @@ const game_html = (
                     </div>
                 </div>
                 <div class="flex justify-center items-center p-2">
-                    <img class="square-10" src="${pokemon_image}" alt="x"/>
+                    <img src="${pokemon_image}" alt="x"/>
                 </div>
                 <div id="slots" class="flex justify-center p-1">
                     ${slots_html}

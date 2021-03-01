@@ -1,5 +1,7 @@
 let alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
+let g_l = en;
+
 (() => {
     const root = document.querySelector('#root');
     let pokemon_name = '';
@@ -18,6 +20,9 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
         const about_btn = document.querySelector('#btn_about');
         about_btn.addEventListener('click', () => about_screen());
+
+        const options_btn = document.querySelector('#btn_options');
+        options_btn.addEventListener('click', () => options_screen());
     };
 
     landing_screen();
@@ -42,6 +47,12 @@ let alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
     const about_screen = () => {
         root.innerHTML = about_html;
+        const btn_back = document.querySelector('#btn_back');
+        btn_back.addEventListener('click', () => landing_screen());
+    };
+
+    const options_screen = () => {
+        root.innerHTML = options_html;
         const btn_back = document.querySelector('#btn_back');
         btn_back.addEventListener('click', () => landing_screen());
     };

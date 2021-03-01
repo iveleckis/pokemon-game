@@ -108,6 +108,7 @@ button:disabled::before {
     padding: 0.5rem;
     width: 100%;
     position: relative;
+    user-select: none;
 }
 
 .btn::before {

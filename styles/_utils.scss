@@ -280,11 +280,24 @@
 
 .grid {
     display: grid;
-    .row {
-        grid-template-rows: 1;
-        @for $col from 1 to 13 {
-            &col-#{$col} {
-                grid-template-columns: $col;
+    &.rows {
+        @for $i from 1 to 100 {
+            &-#{$i} {
+                grid-template-rows: repeat($i, 1fr);
+            }
+        }
+    }
+    &.cols {
+        @for $i from 1 to 100 {
+            &-#{$i} {
+                grid-template-columns: repeat($i, 1fr);
+            }
+        }
+    }
+    &.gap {
+        @for $i from 1 to 11 {
+            &-#{$i} {
+                grid-gap: #{$i}rem;
             }
         }
     }

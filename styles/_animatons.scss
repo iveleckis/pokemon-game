@@ -59,3 +59,19 @@
         transform: rotate(360deg);
     }
 }
+
+@keyframes pokemon_floating {
+    0% {
+        transform: translateY(-5px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+.animate-pokemon_floating {
+    animation: pokemon_floating 2s linear infinite;
+}

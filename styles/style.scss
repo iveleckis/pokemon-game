@@ -5,61 +5,7 @@
 @import 'global';
 @import 'loading';
 @import 'button';
-
-.slot {
-    border-bottom: 2px solid blue;
-}
-
-.matrix-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 2rem);
-    grid-template-rows: repeat(4, 2rem);
-    row-gap: 1rem;
-    column-gap: 1rem;
-}
-
-.slot {
-    border-bottom: 2px solid darkblue;
-    width: 1rem;
-    height: 1rem;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    padding-bottom: 0.1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.copyrights {
-    color: rgb(187, 97, 0);
-}
-
-.panel-title {
-    font-size: 2rem;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 2rem;
-    color: orange;
-    letter-spacing: 1px;
-    font-weight: 900;
-    -webkit-text-stroke: 1px rgb(0, 0, 100);
-    text-shadow: -1px 1px rgb(0, 0, 100), -2px 2px rgb(0, 0, 100),
-        -3px 3px rgb(0, 0, 100), -4px 4px rgb(0, 0, 100),
-        -5px 5px rgb(0, 0, 100), -6px 6px rgb(0, 0, 100);
-}
-
-.panel {
-    padding: 3rem;
-    background: rgb(255, 213, 150);
-    border-radius: 5px;
-    border: 5px solid rgb(208, 122, 83);
-    animation: panel_show 1s;
-}
-
-.toaster {
-    padding: 1rem;
-    background: rgb(255, 213, 150);
-    border-radius: 5px;
-    border: 5px solid rgb(208, 122, 83);
-}
+@import 'slot';
+@import 'panel';
+@import 'toaster';
+@import 'copyrights';

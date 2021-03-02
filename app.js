@@ -182,7 +182,7 @@ let g_l = en;
         all_letters = all_letters.split('').sort(() => Math.random() - 0.5);
         const matrix = [];
         all_letters.forEach((item) => {
-            const button = btn_html('', item, '');
+            const button = btn_html('', item, 'w-2 h-2');
             matrix.push(button);
         });
         return matrix;

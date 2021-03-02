@@ -96,13 +96,13 @@ const game_html = (
                     </div>
                 </div>
                 <div class="flex justify-center items-center p-2">
-                    <img class="square-10" src="${pokemon_image}" alt="x"/>
+                    <img class="w-5 h-5 animate-pokemon_floating" src="${pokemon_image}" alt="x"/>
                 </div>
                 <div id="slots" class="flex justify-center p-1">
                     ${slots_html}
                 </div>
-                <div class="flex justify-center">
-                    <div class="matrix-grid p-2" id="letter_matrix">
+                <div class="">
+                    <div class="grid rows-4 cols-5 gap-1 p-2" id="letter_matrix" style="margin-left: 10px">
                         ${matrix_html}
                     </div>
                 </div>
@@ -160,6 +160,7 @@ const add_score_animtaion_html = (what_to_animate) => {
 
 const loading_html = () => {
     return `
+    <div class="w-10 h-10">
         <div class="loading_container">
             <div class="loading_inner_tow_colored_ball">
                 <div class="loading_inner_block">
@@ -167,5 +168,6 @@ const loading_html = () => {
                 </div>
             </div>
         </div>
+    </div>
     `;
 };

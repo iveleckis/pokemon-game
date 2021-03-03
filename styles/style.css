@@ -1210,4 +1210,12 @@ button:disabled::before {
   color: #bb6100;
 }
 
+@media only screen and (max-width: 600px) {
+  .you_didnt_guess {
+    flex-direction: column;
+    text-align: center;
+    line-height: 2rem;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

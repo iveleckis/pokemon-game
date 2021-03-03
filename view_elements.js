@@ -52,7 +52,7 @@ const loss_html = (pokemon_name, score) => {
                 <div class="panel-title">
                     You have lost :/
                 </div>
-                <h3 class="flex justify-center">
+                <h3 class="you_didnt_guess flex justify-center">
                     You didn't guess
                     <span class="text-red ml-3">
                         ${pokemon_name}

@@ -1142,20 +1142,26 @@ button:disabled::before {
   display: none;
 }
 
+@media only screen and (max-width: 600px) {
+  button {
+    font-size: 13px;
+    padding: 0.6rem;
+  }
+}
 .slot {
   border-bottom: 2px solid blue;
 }
 
 .slot {
   border-bottom: 2px solid darkblue;
-  width: 1rem;
-  height: 1rem;
-  margin: 0.5rem;
-  padding: 0.5rem;
+  width: 100%;
+  margin: 0.2rem;
   padding-bottom: 0.1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 1.5rem;
+  max-width: 1.1rem;
 }
 
 .panel-title {
@@ -1167,6 +1173,8 @@ button:disabled::before {
   color: orange;
   letter-spacing: 1px;
   font-weight: 900;
+  text-align: center;
+  line-height: 2.5rem;
   -webkit-text-stroke: 1px #000064;
   text-shadow: -1px 1px #000064, -2px 2px #000064, -3px 3px #000064, -4px 4px #000064, -5px 5px #000064, -6px 6px #000064;
 }
@@ -1179,6 +1187,18 @@ button:disabled::before {
   animation: panel_show 1s;
 }
 
+@media only screen and (max-width: 600px) {
+  .panel {
+    padding: 1rem;
+    min-width: 80%;
+  }
+
+  .panel-title {
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+    padding-bottom: 0.5rem;
+  }
+}
 .toaster {
   padding: 1rem;
   background: #ffd596;

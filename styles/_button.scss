@@ -82,3 +82,10 @@ button {
         }
     }
 }
+
+@media only screen and (max-width: 600px) {
+    button {
+        font-size: 13px;
+        padding: 0.6rem;
+    }
+}

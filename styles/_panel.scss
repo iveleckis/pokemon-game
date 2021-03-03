@@ -7,6 +7,8 @@
     color: orange;
     letter-spacing: 1px;
     font-weight: 900;
+    text-align: center;
+    line-height: 2.5rem;
     -webkit-text-stroke: 1px rgb(0, 0, 100);
     text-shadow: -1px 1px rgb(0, 0, 100), -2px 2px rgb(0, 0, 100),
         -3px 3px rgb(0, 0, 100), -4px 4px rgb(0, 0, 100),
@@ -19,4 +21,16 @@
     border-radius: 5px;
     border: 5px solid rgb(208, 122, 83);
     animation: panel_show 1s;
+}
+
+@media only screen and (max-width: 600px) {
+    .panel {
+        padding: 1rem;
+        min-width: 80%;
+    }
+    .panel-title {
+        font-size: 1.8rem;
+        line-height: 2.3rem;
+        padding-bottom: 0.5rem;
+    }
 }

@@ -1,25 +1,25 @@
 const btn_html = (id, text, className) => {
-    return `<div class="relative w-full ${className}"><button class="btn" id="${id}">${text}</button></div>`;
+    return `<div class="relative ${className}"><button class="btn" id="${id}">${text}</button></div>`;
 };
 
 const landing_html = `<div class="flex justify-center items-center direction-column w-1/2 app-w-max panel">
                         <div class="panel-title">
                             pokemon game
                         </div>
-                        ${btn_html('btn_start', 'start', 'mt-3')}
-                        ${btn_html('btn_about', 'about', 'mt-3')}
-                        ${btn_html('btn_options', 'options', 'mt-3')}
+                        ${btn_html('btn_start', 'start', 'mt-3 w-full')}
+                        ${btn_html('btn_about', 'about', 'mt-3 w-full')}
+                        ${btn_html('btn_options', 'options', 'mt-3 w-full')}
                     </div>`;
 
 const difficulty_html = `<div class="flex justify-center items-center direction-column w-1/2 app-w-max panel">
                             <div class="panel-title">
                                 Difficulty
                             </div>
-                            ${btn_html('btn_easy', 'easy', 'm-2')}
-                            ${btn_html('btn_medium', 'medium', 'm-2')}
-                            ${btn_html('btn_hard', 'hard', 'm-2')}
+                            ${btn_html('btn_easy', 'easy', 'mt-3 w-full')}
+                            ${btn_html('btn_medium', 'medium', 'mt-3 w-full')}
+                            ${btn_html('btn_hard', 'hard', 'mt-3 w-full')}
                             <div id="start_container" class="m-3"></div>
-                            ${btn_html('btn_back', 'back', 'm-2 mt-3')}
+                            ${btn_html('btn_back', 'back', 'mt-3 w-full')}
                         </div>`;
 
 const about_html = `<div class="w-1/2 app-w-max panel">
@@ -52,8 +52,10 @@ const loss_html = (pokemon_name, score) => {
                 <div class="panel-title">
                     You have lost :/
                 </div>
-                <h3 class="flex justify-center">
-                    You didn't guess
+                <h3 class="you_didnt_guess flex justify-center">
+                    <span>
+                        You didn't guess
+                    </span>
                     <span class="text-red ml-3">
                         ${pokemon_name}
                     </span>
@@ -78,15 +80,12 @@ const game_html = (
 ) => {
     return `
             <div class="panel">
-                <div class="flex justify-between p-2 w-full">
-                    <div>
-                        Score:
-                        <span class="relative" id="score_value_container">
-                            <span id="score_value">
-                                ${score}
-                            </span>
+                <div class="flex justify-between p-2">
+                    <span class="relative" id="score_value_container">
+                        <span id="score_value">
+                            ${score}
                         </span>
-                    </div>
+                    </span>
                     <div id="timer_container">
                         <span class="relative" id="timer_value_container">
                             <span id="timer_value">
@@ -98,7 +97,7 @@ const game_html = (
                 <div class="flex justify-center items-center p-2">
                     <img class="w-5 h-5 animate-pokemon_floating" src="${pokemon_image}" alt="x"/>
                 </div>
-                <div id="slots" class="flex justify-center p-1">
+                <div id="slots" class="flex justify-center p-1 h-2">
                     ${slots_html}
                 </div>
                 <div class="">

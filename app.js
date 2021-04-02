@@ -21,8 +21,8 @@ let g_l = en;
         const about_btn = document.querySelector('#btn_about');
         about_btn.addEventListener('click', () => about_screen());
 
-        const options_btn = document.querySelector('#btn_options');
-        options_btn.addEventListener('click', () => options_screen());
+        /* const options_btn = document.querySelector('#btn_options');
+        options_btn.addEventListener('click', () => options_screen()); */
     };
 
     landing_screen();

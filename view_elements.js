@@ -8,8 +8,8 @@ const landing_html = `<div class="flex justify-center items-center direction-col
                         </div>
                         ${btn_html('btn_start', 'start', 'mt-3')}
                         ${btn_html('btn_about', 'about', 'mt-3')}
-                        ${btn_html('btn_options', 'options', 'mt-3')}
                     </div>`;
+//${btn_html('btn_options', 'options', 'mt-3')}
 
 const difficulty_html = `<div class="flex justify-center items-center direction-column w-1/2 app-w-max panel">
                             <div class="panel-title">
